@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get ('DJANGO_SECRET_KEY', 'cg # p $ g + j9tax! # a3cup @
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = False
-DEBUG = os.environ.get ('DJANGO_DEBUG', '')! = 'False'  
+DEBUG = os.environ.get ('DJANGO_DEBUG', '') != 'False'  
 ALLOWED_HOSTS = []
 
 
@@ -37,11 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'catalog.apps.CatalogConfig',
+    'catalog',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    'django.middleware.security.SecurityMiddleware', 
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

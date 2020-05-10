@@ -10,7 +10,8 @@ from .models import Author, Genre, Book, BookInstance, Language
 #admin.site.register(Genre)
 #admin.site.register(Language)
 
-
+admin.site.register(Genre)
+admin.site.register(Language)
 
 class BooksInline(admin.TabularInline):
     """Defines format of inline book insertion (used in AuthorAdmin)"""

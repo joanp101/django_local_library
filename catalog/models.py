@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 from django.urls import reverse  # To generate URLS by reversing URL patterns
@@ -16,15 +17,14 @@ class Genre(models.Model):
         """String for representing the Model object (in Admin site etc.)"""
         return self.name
 
+    
+    
 
 class Language(models.Model):
     """Model representing a Language (e.g. English, French, Japanese, etc.)"""
     name = models.CharField(max_length=200,
                             help_text="Enter the book's natural language (e.g. English, French, Japanese etc.)")
 
-    def __str__(self):
-        """String for representing the Model object (in Admin site etc.)"""
-        return self.name
 
 
 class Book(models.Model):
@@ -41,20 +41,21 @@ class Book(models.Model):
     # ManyToManyField used because a genre can contain many books and a Book can cover many genres.
     # Genre class has already been defined so we can specify the object above.
     language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
+   
 
-    def display_genre(self):
-        """Creates a string for the Genre. This is required to display genre in Admin."""
-        return ', '.join([genre.name for genre in self.genre.all()[:3]])
-
-    display_genre.short_description = 'Genre'
-
-    def get_absolute_url(self):
-        """Returns the url to access a particular book instance."""
-        return reverse('book-detail', args=[str(self.id)])
-
+  
+    
     def __str__(self):
         """String for representing the Model object."""
         return self.title
+    objects = models.Manager()
+
+    def display_genre(self):
+        """Creates a string for the Genre. This is required to display genre in Admin."""
+        return ', '.join([genre.name for genre in self.genre.name()[:3]])
+
+    display_genre.short_description = 'Genre'
+
 
 
 import uuid  # Required for unique book instances
@@ -71,7 +72,7 @@ class BookInstance(models.Model):
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-
+   
     @property
     def is_overdue(self):
         if self.due_back and date.today() > self.due_back:
@@ -91,18 +92,26 @@ class BookInstance(models.Model):
         blank=True,
         default='d',
         help_text='Book availability')
+    objects = models.Manager()
 
     class Meta:
         ordering = ['due_back']
         permissions = (("can_mark_returned", "Set book as returned"),)
 
+   
+    def get_absolute_url(self):
+        """Returns the url to access a particular book instance."""
+        return reverse('book-detail', args=[str(self.id)])
+
     def __str__(self):
         """String for representing the Model object."""
-        return '{0} ({1})'.format(self.id, self.book.title)
+        return '{0} ({1})'.format(self.id, self.book)
+    
 
 
 class Author(models.Model):
     """Model representing an author."""
+    id = models.AutoField(primary_key = True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
@@ -118,3 +127,4 @@ class Author(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return '{0}, {1}'.format(self.last_name, self.first_name)
+    objects = models.Manager()
