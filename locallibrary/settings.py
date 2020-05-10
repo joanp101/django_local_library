@@ -25,7 +25,7 @@ SECRET_KEY = 'y_e%^qmu3yg8v(4y-k7_d*7ln4xze1rnnv0s6%9z^1b5m%+t$m'
 # SECURITY WARNING: don't run with  debug turned on in production!
 DEBUG = False
 #DEBUG = os.environ.get ('DJANGO_DEBUG', '') != 'False'  
-ALLOWED_HOSTS = ['https://shrouded-stream-38586.herokuapp.com/' '127.0.0.1' ]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
