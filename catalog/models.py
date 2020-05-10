@@ -25,6 +25,9 @@ class Language(models.Model):
     name = models.CharField(max_length=200,
                             help_text="Enter the book's natural language (e.g. English, French, Japanese etc.)")
 
+    def __str__(self):
+        """String for representing the Model object (in Admin site etc.)"""
+        return self.name
 
 
 class Book(models.Model):
@@ -92,7 +95,6 @@ class BookInstance(models.Model):
         blank=True,
         default='d',
         help_text='Book availability')
-    objects = models.Manager()
 
     class Meta:
         ordering = ['due_back']
@@ -105,7 +107,8 @@ class BookInstance(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return '{0} ({1})'.format(self.id, self.book)
+        #return '{0} ({1})'.format(self.id, self.book)
+        return  f'{self.id} ({self.book})'
     
 
 
@@ -127,4 +130,4 @@ class Author(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return '{0}, {1}'.format(self.last_name, self.first_name)
-    objects = models.Manager()
+    
