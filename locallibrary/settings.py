@@ -24,7 +24,7 @@ SECRET_KEY = os.environ.get ('DJANGO_SECRET_KEY', 'cg # p $ g + j9tax! # a3cup @
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = False
-DEBUG = os.environ.get ('DJANGO_DEBUG', '') != 'False'  
+#DEBUG = os.environ.get ('DJANGO_DEBUG', '') != 'False'  
 ALLOWED_HOSTS = ['https://shrouded-stream-38586.herokuapp.com/' '127.0.0.1' ]
 
 
