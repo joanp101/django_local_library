@@ -7,6 +7,7 @@ from django.urls import reverse  # To generate URLS by reversing URL patterns
 
 
 class Genre(models.Model):
+
     """Model representing a book genre (e.g. Science Fiction, Non Fiction)."""
     name = models.CharField(
         max_length=200,
@@ -59,7 +60,7 @@ class Book(models.Model):
 
     display_genre.short_description = 'Genre'
 
-
+    objects = models.Manager()
 
 import uuid  # Required for unique book instances
 from datetime import date
@@ -109,7 +110,7 @@ class BookInstance(models.Model):
         """String for representing the Model object."""
         #return '{0} ({1})'.format(self.id, self.book)
         return  f'{self.id} ({self.book})'
-    
+    objects = models.Manager()
 
 
 class Author(models.Model):
@@ -130,4 +131,4 @@ class Author(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return '{0}, {1}'.format(self.last_name, self.first_name)
-    
+    objects = models.Manager()
