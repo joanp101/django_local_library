@@ -11,7 +11,7 @@ from .models import Author, Genre, Book, BookInstance, Language
 #admin.site.register(Language)
 
 admin.site.register(Genre)
-admin.site.register(Language)
+admin.site.register(Language)   
 
 class BooksInline(admin.TabularInline):
     """Defines format of inline book insertion (used in AuthorAdmin)"""
@@ -44,7 +44,7 @@ class BookAdmin(admin.ModelAdmin):
      - fields to be displayed in list view (list_display)
      - adds inline addition of book instances in book view (inlines)
     """
-    list_display = ('title', 'author', 'display_genre')
+    list_display = ('title', 'author')
     inlines = [BooksInstanceInline]
 
 

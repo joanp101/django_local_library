@@ -52,13 +52,13 @@ class Book(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return self.title
-    objects = models.Manager()
+    #objects = models.Manager()
 
-    def display_genre(self):
+    '''def display_genre(self):
         """Creates a string for the Genre. This is required to display genre in Admin."""
-        return ', '.join([genre.name for genre in self.genre.name()[:3]])
+        return ', '.join([ genre for genre in self.genre.model()[:3]])
 
-    display_genre.short_description = 'Genre'
+    display_genre.short_description = 'Genre'''
 
     objects = models.Manager()
 
